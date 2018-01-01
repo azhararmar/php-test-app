@@ -4,7 +4,7 @@ namespace App\Manager;
 
 class Request
 {
-	public function getRequestUri()
+	public function getMatchedUri()
 	{
 		return $_SERVER['REQUEST_URI'];
 	}

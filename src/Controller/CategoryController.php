@@ -4,10 +4,10 @@ namespace App\Controller;
 
 use App\Manager\Request;
 
-class ItemController
+class CategoryController
 {
 	public function listAction(Request $request)
 	{
-		return 'item/list.html';
+		return 'category/list.html';
 	}
 }
