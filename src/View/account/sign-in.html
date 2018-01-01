@@ -1,1 +1,62 @@
-account sign-in
+<div class="container-fluid">
+	<img class="img-center form-logo" src="/assets/images/logo.png">
+	<div class="col-25-percent align-center">
+		<div class="alert alert-danger alert-minimal hide" role="alert">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            <span class="sr-only">Error:</span>
+            <span class="alert-error-text"></span>
+        </div>
+		<h4 class="form-title">Account Sign In</h4>
+		<form id="account_sign_in" class="form-bordered" action="/account/sign-in" method="post">
+			<div class="input-group">
+				<label class="form-input-label" for="email">Email Address</label>
+				<input type="text" class="form-input" id="email" name="email">
+				<span class="error"></span>
+			</div>
+			<div class="input-group">
+				<label class="form-input-label" for="password">Password</label>
+				<input type="password" class="form-input" id="password" name="password">
+				<span class="error"></span>
+			</div>
+			<button class="form-input-submit" id="submit" type="submit" name="submit">
+				<i class="fa fa-spinner fa-spin submit-loader-icon hide"></i>
+				<span class="submit-loader-text">Sign In</span>
+			</button>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		jQuery('#submit').on('click', function() {
+			$('span.error').text('');
+			$('.alert').addClass('hide');
+			$('.alert-error-text').text('');
+			$('.form-input-submit').attr('disabled', 'disabled');
+			$('.submit-loader-icon').removeClass('hide');
+			$('.submit-loader-text').text('Please Wait...');
+			$.ajax({
+				url: '/account/sign-in',
+				data: $('form').serialize(),
+				method: 'POST',
+				success: function (response) {
+					if ('error' == response.status) {
+						$.each(response.fields, function(key, value) {
+							if ($('#'+key).length) {
+								$('#'+key).parent().find('.error').text(value);
+							}
+						});
+						$('.form-input-submit').removeAttr('disabled');
+						$('.submit-loader-icon').addClass('hide');
+						$('.submit-loader-text').text('Sign In');
+						$('.alert-error-text').text(response.message);
+						$('.alert').removeClass('hide');
+					}
+					if ('success' == response.status) {
+						window.location.href = response.redirect_uri;
+					}
+				}
+			});
+			return false;
+		});
+	});
+</script>

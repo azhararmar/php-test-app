@@ -73,16 +73,22 @@ class Application
 		}
 		// Continue with rest of operations after security validations
 		$controller = new $controllerFQCN();
-		$template = $controller->$action($request);
-		$requiresTemplate = !empty($template);
+		if (method_exists($controller, 'setSecurityManager')) {
+			$controller->setSecurityManager($security);
+		}
+		if (method_exists($controller, 'setResponse')) {
+			$controller->setResponse($response);
+		}
+		$controller->$action($request);
+		$requiresTemplate = !empty($controller->getTemplate());
 		if (true === $requiresTemplate) {
-			if (!is_string($template)) {
+			if (!is_string($controller->getTemplate())) {
 				throw new \Exception(
 					'Action must return template path in string format in '.$controllerFQCN.'::'.$action
 				);
 			}
 			// Check if returned template path exist
-			$templatePath = $this->config['view_dir'].$template;
+			$templatePath = $this->config['view_dir'].$controller->getTemplate();
 			if (!file_exists($templatePath)) {
 				throw new \Exception('Template not found at given path {'.$templatePath.'}');
 			}

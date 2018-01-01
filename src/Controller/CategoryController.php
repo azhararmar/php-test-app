@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Manager\Request;
 
-class CategoryController
+class CategoryController extends BaseController
 {
 	public function listAction(Request $request)
 	{

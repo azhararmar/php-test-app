@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Manager\Request;
 
-class ItemController
+class ItemController extends BaseController
 {
 	public function listAction(Request $request)
 	{

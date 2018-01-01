@@ -13,4 +13,17 @@ class Security
 	{
 		return !empty($_SESSION['user']);
 	}
+
+	public function eraseSession()
+	{
+		session_destroy();
+		session_unset();
+		unset($_SESSION["user"]);
+		$_SESSION = array();
+	}
+
+	public function authenticate(array $userInfo = array())
+	{
+		$_SESSION['user'] = $userInfo;
+	}
 }
