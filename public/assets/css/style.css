@@ -148,3 +148,86 @@ button[disabled] {
 	margin-right: auto;
 	display: block;
 }
+.pt_15 {
+	padding-top: 15px;
+}
+/**
+ * Navigation Menu
+ */
+#sidebar-wrapper {
+	width: 200px;
+	z-index: 1000;
+	position: fixed;
+	left: 200px;
+	height: 100%;
+	margin-left: -200px;
+	overflow-y: auto;
+	background: #f5f5f5;
+	border-right: 1px solid #ddd;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+	overflow: hidden;
+}
+.sidebar-nav {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.sidebar-nav li {
+    text-indent: 7px;
+    line-height: 50px;
+}
+ul.sidebar-nav li.active {
+    background: #e32028;
+}
+ul.sidebar-nav li.active a {
+    color: #fff;
+}
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+    font-size: 15px;
+}
+.sidebar-item {
+    border-bottom: 1px solid #ddd;
+}
+.sidebar-brand {
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 15px;
+}
+/**
+ * Top NavBar
+ */
+.navbar-oro {
+    min-height: 40px;
+}
+.navbar-top {
+    border-radius: 0px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 0px;
+}
+.navbar-default {
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+}
+.navbar {
+    position: relative;
+}
+#wrapper {
+    padding-left: 200px;
+}
+.hamburger {
+    padding: 2px;
+}
+.hamburger-box, .hamburger-inner, .hamburger-inner::after, .hamburger-inner::before {
+    width: 24px;
+    height: 1px;
+}
+.navbar .container-fluid {
+	padding-left: 10px;
+	padding-top: 6px;
+}

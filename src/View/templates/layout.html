@@ -4,11 +4,46 @@
         <title>Dashboard</title>
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,700" rel="stylesheet"> 
         <link rel="stylesheet" type="text/css" href="/assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css">
+        <!-- <link rel="stylesheet" type="text/css" href="/assets/css/hamburger.min.css"> -->
         <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
         <script src="/assets/js/jquery-3.2.1.min.js"></script>
 		<script src="/assets/js/custom.js"></script>
     </head>
     <body>
+        <?php if ($this->userIsLoggedIn()): ?>
+            <div id="wrapper">
+                <div id="sidebar-wrapper">
+                    <div class="sidebar-brand pt_15">
+                        <img class="img-center" src="/assets/images/logo.png">
+                    </div>
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-item <?php echo '/item/list' == $matchedUri ? 'active' : ''; ?>">
+                            <a href="/item/list">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                Items
+                            </a>
+                        </li>
+                        <li class="sidebar-item <?php echo '/category/list' == $matchedUri ? 'active' : ''; ?>">
+                            <a href="/category/list">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                Categories
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <nav class="navbar navbar-oro navbar-default navbar-top">
+                    <div class="container-fluid">
+                        <div class="navbar-header pt_5">
+                            <!-- <button id="menu-toggle" class="hamburger hamburger--spin menu-toggle-icon" type="button">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button> -->
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        <?php endif; ?>
     	<?php echo $this->content(); ?>
     </body>
 </html>

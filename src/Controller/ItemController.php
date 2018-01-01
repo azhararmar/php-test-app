@@ -8,6 +8,6 @@ class ItemController extends BaseController
 {
 	public function listAction(Request $request)
 	{
-		return 'item/list.html';
+		return $this->render('item/list.html');
 	}
 }

@@ -103,6 +103,11 @@ class Application
 		require_once $this->content;
 	}
 
+	public function userIsLoggedIn()
+	{
+		return $this->security->userIsLoggedIn();
+	}
+
 	public function getConfig()
 	{
 		return $this->config;
