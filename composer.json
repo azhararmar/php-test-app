@@ -1,0 +1,16 @@
+{
+    "name": "azhararmar/php-test-app",
+    "description": "Demo App For App",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ibrahim Azhar Armar",
+            "email": "azhar@iarmar.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
