@@ -1,6 +1,7 @@
 <?php
 
 return [
+	'/' => 'DefaultController:indexAction',
 	'/item/list' => 'ItemController:listAction',
 	'/item/new' => 'ItemController:newAction',
 	'/category/list' => 'CategoryController:listAction',
