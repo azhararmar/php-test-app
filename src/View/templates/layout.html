@@ -10,20 +10,20 @@
 		<script src="/assets/js/custom.js"></script>
     </head>
     <body>
-        <?php if ($this->userIsLoggedIn()): ?>
-            <div id="wrapper">
+        <div id="wrapper">
+            <?php if ($this->userIsLoggedIn()): ?>
                 <div id="sidebar-wrapper">
                     <div class="sidebar-brand pt_15">
                         <img class="img-center" src="/assets/images/logo.png">
                     </div>
                     <ul class="sidebar-nav">
-                        <li class="sidebar-item <?php echo '/item/list' == $matchedUri ? 'active' : ''; ?>">
+                        <li class="sidebar-item <?php echo in_array($matchedUri, ['/item/list', '/item/new']) ? 'active' : ''; ?>">
                             <a href="/item/list">
                                 <i class="fa fa-angle-right" aria-hidden="true"></i>
                                 Items
                             </a>
                         </li>
-                        <li class="sidebar-item <?php echo '/category/list' == $matchedUri ? 'active' : ''; ?>">
+                        <li class="sidebar-item <?php echo in_array($matchedUri, ['/category/list', '/category/new']) ? 'active' : ''; ?>">
                             <a href="/category/list">
                                 <i class="fa fa-angle-right" aria-hidden="true"></i>
                                 Categories
@@ -40,10 +40,16 @@
                                 </span>
                             </button> -->
                         </div>
+                        <div class="navbar navbar-right">
+                            <a href="/account/sign-out">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                Sign Out
+                            </a>
+                        </div>
                     </div>
                 </nav>
-            </div>
-        <?php endif; ?>
-    	<?php echo $this->content(); ?>
+            <?php endif; ?>
+        	<?php echo $this->content(); ?>
+        </div>
     </body>
 </html>

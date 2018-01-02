@@ -227,7 +227,59 @@ ul.sidebar-nav li.active a {
     width: 24px;
     height: 1px;
 }
-.navbar .container-fluid {
-	padding-left: 10px;
-	padding-top: 6px;
+.navbar-right a {
+	float: right;
+	font-size: 14px;
+	display: block;
+	padding: 13px;
+	text-decoration: none;
+	border-left: 1px solid #ddd;
+}
+.page-info {
+	position: relative;
+	height: 68px;
+	border-bottom: 1px solid #ddd;
+}
+.column-50percent-left {
+	width: 50%;
+	float: left;
+	height: 100%;
+}
+.column-50percent-right {
+	width: 50%;
+	float: right;
+	height: 100%;
+}
+.page-info h3 {
+    font-size: 20px;
+    padding: 24px;
+}
+.page-info h3 i {
+	margin-right: 5px;
+}
+.btn {
+	position: relative;
+	display: inline-block;
+}
+.btn-add {
+    background: #e32028;
+    padding: 8px 12px;
+    height: 20px;
+    margin-top: 16px;
+    margin-right: 15px;
+    color: #fff;
+    border-radius: 2px;
+    border: 1px solid #b70e15;
+}
+.btn-default {
+	padding: 8px 12px;
+	border: 1px solid #ddd;
+	text-decoration: none;
+	font-size: 14px;
+	margin-top: 16px;
+	margin-right: 15px;
+	border-radius: 2px;
+}
+.pull-right {
+	float: right;
 }
