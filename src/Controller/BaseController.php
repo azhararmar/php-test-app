@@ -13,7 +13,9 @@ class BaseController
 
 	protected $template;
 
-	protected $params = array();
+	protected $data = array();
+
+	protected $parameters;
 
 	public function setSecurityManager(Security $security)
 	{
@@ -37,10 +39,10 @@ class BaseController
 		return $this->response;
 	}
 
-	public function render($template, array $params = array())
+	public function render($template, array $data = array())
 	{
 		$this->template = $template;
-		$this->params = $params;
+		$this->data = $data;
 	}
 
 	public function getTemplate()
@@ -48,8 +50,19 @@ class BaseController
 		return $this->template;
 	}
 
-	public function getParams()
+	public function getData()
 	{
-		return $this->params;
+		return $this->data;
+	}
+
+	public function setParameters(array $parameters)
+	{
+		$this->parameters = $parameters;
+		return $this;
+	}
+
+	public function getParameter($key)
+	{
+		return $this->parameters[$key];
 	}
 }

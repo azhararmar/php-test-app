@@ -42,7 +42,7 @@ class AccountController extends BaseController
 			// Validation passed
 			$this->getSecurityManager()->authenticate($user);
 			$response['status'] = 'success';
-			$response['message'] = 'Successfully authencaated, redirecting...';
+			$response['message'] = 'Successfully authencated, redirecting...';
 			$response['redirect_uri'] = '/item/list';
 			return Response::dispatchJson($response);
 		}

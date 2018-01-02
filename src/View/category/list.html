@@ -11,3 +11,38 @@
         </a>
 	</div>
 </div>
+<div class="row">
+	<table class="table">
+        <thead>
+            <tr>
+                <th style="width:60px;">ID</th>
+                <th>Category Name</th>
+                <th>Image</th>
+                <th>Parent Category</th>
+            </tr>
+        </thead>
+        <tbody>
+        	<?php if (empty($this->categories)): ?>
+	            <tr>
+	                <td class="bg-grey text-center regular-font" colspan="8">
+	                    Your category list is currently empty, try adding a new category by clicking on this <a href="/category/new" class="signature-color">link</a>
+	                </td>
+	            </tr>
+        	<?php endif; ?>
+        	<?php foreach ($this->categories as $category): ?>
+	        	<tr>
+	                <td><?php echo $category['id']; ?></td>
+	                <td><?php echo $category['name']; ?></td>
+	                <td style="padding: 0px !important;">
+	                	<?php if (!empty($category['image'])): ?>
+	                		<a href="/uploads/<?php echo $category['image']; ?>" target="_blank">
+	                			<img src="/uploads/<?php echo $category['image']; ?>" style="height:35px;padding-top:5px;">
+	                		</a>
+	                	<?php endif; ?>
+	                </td>
+	                <td><?php echo $category['parent_name']; ?></td>
+	            </tr>
+        	<?php endforeach; ?>
+        </tbody>
+    </table>
+</div>

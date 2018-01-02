@@ -79,6 +79,7 @@ class Application
 		if (method_exists($controller, 'setResponse')) {
 			$controller->setResponse($response);
 		}
+		$controller->setParameters($this->config['parameters']);
 		$controller->$action($request);
 		$requiresTemplate = !empty($controller->getTemplate());
 		if (true === $requiresTemplate) {
@@ -93,6 +94,10 @@ class Application
 				throw new \Exception('Template not found at given path {'.$templatePath.'}');
 			}
 			$this->content = $templatePath;
+			// Extract data
+			foreach ($controller->getData() as $dataKey => $dataValue) {
+				$this->$dataKey = $dataValue;
+			}
 			require_once $this->config['templates']['layout'];
 		}
 		return $this;

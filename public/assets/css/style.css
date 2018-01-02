@@ -47,10 +47,16 @@ table {
  */
 body {
 	font-family: 'Open Sans', sans-serif;
+	font-size: 15px;
 }
 span.error {
 	font-size: 14px;
 	color: #e32028;
+}
+span.error-block {
+	padding-left: 25%;
+	display: block;
+	padding-top: 5px;
 }
 .alert {
 	border-radius: 2px;
@@ -112,6 +118,7 @@ button[disabled] {
 }
 .input-group {
 	margin-bottom: 15px;
+	font-size: 15px;
 }
 .form-input-label {
 	display: block;
@@ -240,6 +247,9 @@ ul.sidebar-nav li.active a {
 	height: 68px;
 	border-bottom: 1px solid #ddd;
 }
+.pt0 {
+	padding-top: 0px!important;
+}
 .column-50percent-left {
 	width: 50%;
 	float: left;
@@ -249,6 +259,10 @@ ul.sidebar-nav li.active a {
 	width: 50%;
 	float: right;
 	height: 100%;
+}
+.form-row {
+	width: 50%;
+	padding: 20px;
 }
 .page-info h3 {
     font-size: 20px;
@@ -260,6 +274,16 @@ ul.sidebar-nav li.active a {
 .btn {
 	position: relative;
 	display: inline-block;
+	cursor: pointer;
+}
+.form-full-width .input-group label.form-input-label {
+	width: 25%;
+	float: left;
+	padding-top: 8px;
+	font-size: 15px;
+}
+.form-full-width .input-group input {
+	width: 75%;
 }
 .btn-add {
     background: #e32028;
@@ -282,4 +306,50 @@ ul.sidebar-nav li.active a {
 }
 .pull-right {
 	float: right;
+}
+.input-radio {
+	width:auto!important;
+	margin-right:5px!important;
+}
+.content-info {
+	margin: 20px 20px 0px 20px;
+	background: #f6f6f6;
+	padding: 15px;
+	border-radius: 2px;
+	border: 1px solid #cecece;
+}
+.btn-oro {
+	background-color: #e32028;
+	color: #ffffff;
+	border: 1px solid #ae1118;
+	font-weight: 300!important;
+}
+.table {
+	width: 100%;
+}
+.table > tbody > tr > td, .table > thead > tr > th {
+	padding: 10px 15px !important;
+	text-align: left;
+}
+.table > thead > tr > th {
+    border-bottom: 1px solid #ddd;
+    font-weight: 600;
+}
+.table > thead > tr > th {
+    vertical-align: bottom;
+}
+.table > tbody > tr > td {
+	line-height: 1.42857143;
+	vertical-align: top;
+	border-top: 1px solid #ddd;
+}
+.bg-grey {
+    background: #f5f5f5;
+}
+.text-center {
+    text-align: center!important;
+}
+.signature-color {
+	color: #e32028;
+	text-decoration: none;
 }

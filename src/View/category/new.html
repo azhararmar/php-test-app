@@ -2,7 +2,7 @@
 	<div class="column-50percent-left">
 		<h3 class="">
             <i class="fa fa-tag" aria-hidden="true"></i>
-            Create Category
+            Create Category / Sub Category
         </h3>
 	</div>
 	<div class="column-50percent-right">
@@ -12,3 +12,93 @@
         </a>
 	</div>
 </div>
+<div class="content-info">
+	<i class="fa fa-info-circle" aria-hidden="true"></i>
+	To create a new subcategory, select the type and parent category.
+</div>
+<div class="form-row">
+	<form enctype="multipart/form-data" class="form form-full-width" method="post">
+		<div class="input-group">
+			<label class="form-input-label pt0" for="email">Type</label>
+			<input class="input-radio" type="radio" name="type" value="category" id="radio-category" checked="checked">
+			<label for="radio-category">Category</label>
+			<input class="input-radio" type="radio" name="type" value="subcategory" id="radio-subcategory">
+			<label for="radio-subcategory">Sub Category</label>
+			<span class="error error-block"></span>
+		</div>
+		<div class="input-group hide" id="parent-category">
+			<label class="form-input-label" for="email" style="padding-top:0px;">Parent category</label>
+			<select name="parent_id" style="width:75%;" id="category">
+				<?php if (!empty($this->categories)): ?>
+					<option></option>
+				<?php endif; ?>
+				<?php foreach ($this->categories as $category): ?>
+					<option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
+				<?php endforeach; ?>
+			</select>
+			<span class="error error-block"></span>
+		</div>
+		<div class="input-group">
+			<label class="form-input-label" for="name">Name</label>
+			<input type="text" class="form-input" id="name" name="name">
+			<span class="error error-block"></span>
+		</div>
+		<div class="input-group">
+			<label class="form-input-label" for="image">Image</label>
+			<input type="file" class="" id="image" name="image" accept="image/*">
+			<span class="error error-block"></span>
+		</div>
+		<button class="btn btn-default btn-oro" id="submit" type="submit" name="submit">
+			<i class="fa fa-spinner fa-spin submit-loader-icon hide"></i>
+			<span class="submit-loader-text">Sign In</span>
+		</button>
+	</form>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.input-radio').on('change', function() {
+			var value = $(this).filter(':checked').val();
+			if ('subcategory' == value) {
+				$('#parent-category').removeClass('hide');
+			} else {
+				$('#parent-category').addClass('hide');
+			}
+		});
+		$('#submit').on('click', function() {
+			$('span.error').text('');
+            $('.alert').addClass('hide');
+            $('.alert-error-text').text('');
+            $('#submit').attr('disabled', 'disabled');
+            $('.submit-loader-icon').removeClass('hide');
+            $('.submit-loader-text').text('Please Wait...');
+            var form = $('form');
+			$.ajax({
+                url: '/category/new',
+                method: 'POST',
+                data: new FormData(form[0]),
+                processData: false,
+                contentType: false,
+                cache: false,
+                dataType: 'json',
+                success: function (response) {
+                    if ('error' == response.status) {
+                        $.each(response.fields, function(key, value) {
+                            if ($('#'+key).length) {
+                                $('#'+key).parent().find('.error').text(value);
+                            }
+                        });
+                        $('#submit').removeAttr('disabled');
+                        $('.submit-loader-icon').addClass('hide');
+                        $('.submit-loader-text').text('Save');
+                        $('.alert-error-text').text(response.message);
+                        $('.alert').removeClass('hide');
+                    }
+                    if ('success' == response.status) {
+                        window.location.href = response.redirect_uri;
+                    }
+                }
+            });
+			return false;
+		});
+	});
+</script>
