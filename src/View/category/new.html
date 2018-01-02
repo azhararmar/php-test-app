@@ -19,7 +19,7 @@
 <div class="form-row">
 	<form enctype="multipart/form-data" class="form form-full-width" method="post">
 		<div class="input-group">
-			<label class="form-input-label pt0" for="email">Type</label>
+			<label class="form-input-label pt0" for="radio-category">Type</label>
 			<input class="input-radio" type="radio" name="type" value="category" id="radio-category" checked="checked">
 			<label for="radio-category">Category</label>
 			<input class="input-radio" type="radio" name="type" value="subcategory" id="radio-subcategory">
@@ -27,7 +27,7 @@
 			<span class="error error-block"></span>
 		</div>
 		<div class="input-group hide" id="parent-category">
-			<label class="form-input-label" for="email" style="padding-top:0px;">Parent category</label>
+			<label class="form-input-label" for="parent-category" style="padding-top:0px;">Parent category</label>
 			<select name="parent_id" style="width:75%;" id="category">
 				<?php if (!empty($this->categories)): ?>
 					<option></option>
@@ -50,7 +50,7 @@
 		</div>
 		<button class="btn btn-default btn-oro" id="submit" type="submit" name="submit">
 			<i class="fa fa-spinner fa-spin submit-loader-icon hide"></i>
-			<span class="submit-loader-text">Sign In</span>
+			<span class="submit-loader-text">Save</span>
 		</button>
 	</form>
 </div>

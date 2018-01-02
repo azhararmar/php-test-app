@@ -59,4 +59,15 @@ class CategoryController extends BaseController
 			'categories' => Category::fetchParents()
 		]);
 	}
+
+	public function fetchCategoriesAction(Request $request)
+	{
+		if ($request->isPost() && $request->isXmlHttpRequest()) {
+			$postData = $request->getPost();
+			$categories = Category::fetchByParentId($postData['category_id']);
+			return Response::dispatchJson([
+				'categories' => $categories
+			]);
+		}
+	}
 }

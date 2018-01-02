@@ -12,3 +12,106 @@
         </a>
 	</div>
 </div>
+<div class="form-row">
+	<form enctype="multipart/form-data" class="form form-full-width" method="post">
+		<div class="input-group">
+			<label class="form-input-label" for="category" style="padding-top:0px;">Category</label>
+			<select name="category_id" style="width:75%;" id="category_id">
+				<?php if (!empty($this->categories)): ?>
+					<option></option>
+				<?php endif; ?>
+				<?php foreach ($this->categories as $category): ?>
+					<option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
+				<?php endforeach; ?>
+			</select>
+			<span class="error error-block"></span>
+		</div>
+		<div class="input-group">
+			<label class="form-input-label" for="subcategory" style="padding-top:0px;">Subcategory</label>
+			<select name="subcategory_id" style="width:75%;" id="subcategory_id" disabled="disabled">
+				<option></option>
+			</select>
+			<span class="error error-block"></span>
+		</div>
+		<div class="input-group">
+			<label class="form-input-label" for="name">Name</label>
+			<input type="text" class="form-input" id="name" name="name">
+			<span class="error error-block"></span>
+		</div>
+		<div class="input-group">
+			<label class="form-input-label" for="stock">Stock</label>
+			<input type="text" class="form-input" id="stock" name="stock">
+			<span class="error error-block"></span>
+		</div>
+		<div class="input-group">
+			<label class="form-input-label" for="price">Price</label>
+			<input type="text" class="form-input" id="price" name="price">
+			<span class="error error-block"></span>
+		</div>
+		<button class="btn btn-default btn-oro" id="submit" type="submit" name="submit">
+			<i class="fa fa-spinner fa-spin submit-loader-icon hide"></i>
+			<span class="submit-loader-text">Save</span>
+		</button>
+	</form>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		$('#category_id').on('change', function(response) {
+			var categoryId = $(this).val();
+			$('#subcategory_id').html('<option></option>');
+			$.ajax({
+                url: '/item/fetch-category-by-parent-id',
+                method: 'POST',
+                data: 'category_id='+categoryId,
+                dataType: 'json',
+                success: function (response) {
+                	var html = '';
+                    $.each(response.categories, function(index, value) {
+                    	html += '<option value='+value.id+'>'+value.name+'</option>';
+                    });
+                    $('#subcategory_id').removeAttr('disabled');
+                    $('#subcategory_id').append(html);
+                }
+            });
+			return false;
+		});
+
+		$('#submit').on('click', function() {
+			$('span.error').text('');
+            $('.alert').addClass('hide');
+            $('.alert-error-text').text('');
+            $('#submit').attr('disabled', 'disabled');
+            $('.submit-loader-icon').removeClass('hide');
+            $('.submit-loader-text').text('Please Wait...');
+            var form = $('form');
+			$.ajax({
+                url: '/item/new',
+                method: 'POST',
+                data: new FormData(form[0]),
+                processData: false,
+                contentType: false,
+                cache: false,
+                dataType: 'json',
+                success: function (response) {
+                    if ('error' == response.status) {
+                        $.each(response.fields, function(key, value) {
+                            if ($('#'+key).length) {
+                                $('#'+key).parent().find('.error').text(value);
+                            }
+                        });
+                        $('#submit').removeAttr('disabled');
+                        $('.submit-loader-icon').addClass('hide');
+                        $('.submit-loader-text').text('Save');
+                        $('.alert-error-text').text(response.message);
+                        $('.alert').removeClass('hide');
+                    }
+                    if ('success' == response.status) {
+                        window.location.href = response.redirect_uri;
+                    }
+                }
+            });
+			return false;
+		});
+	});
+</script>

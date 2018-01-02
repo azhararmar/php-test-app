@@ -51,4 +51,24 @@ class Category extends BaseModel
 		$results = $sth->fetchAll(PDO::FETCH_ASSOC);
 		return $results;
 	}
+
+	public static function fetchByParentId($categoryId)
+	{
+		$sth = self::getConnection()->prepare('
+			SELECT
+				c.id,
+				c.name,
+				c.image
+			FROM
+				category c
+			WHERE
+				c.parent_id = :parent_id
+			ORDER BY
+				c.id DESC
+		');
+		$sth->bindParam(':parent_id', $categoryId);
+		$sth->execute();
+		$results = $sth->fetchAll(PDO::FETCH_ASSOC);
+		return $results;
+	}
 }
